@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PawLove Shelter</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="font-sans bg-zinc-50 text-zinc-800">
+
+    <!-- Navbar -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 bg-orange-500 rounded-2xl flex items-center justify-center text-white text-3xl">🐾</div>
+                <div>
+                    <span class="text-3xl font-bold tracking-tight text-orange-600" data-translate="title">PawLove</span>
+                    <span class="block text-xs -mt-1 text-zinc-500" data-translate="subtitle">Shelter Anjing & Kucing</span>
+                </div>
+            </div>
+            
+            <div class="hidden md:flex items-center gap-8 text-lg">
+                <a href="#beranda" class="nav-link font-medium" data-translate="nav-home">Beranda</a>
+                <a href="#adopsi" class="nav-link font-medium" data-translate="nav-adopt">Adopsi</a>
+                <a href="#donasi" class="nav-link font-medium" data-translate="nav-donate">Donasi</a>
+                <a href="#tentang" class="nav-link font-medium" data-translate="nav-about">Tentang Kami</a>
+            </div>
+            
+            <div class="flex items-center gap-4">
+                <button onclick="toggleLanguage()" class="px-5 py-2.5 bg-white border border-orange-500 text-orange-600 rounded-2xl hover:bg-orange-50 transition flex items-center gap-2 font-medium">
+                    <i class="fas fa-globe"></i>
+                    <span id="current-lang">ID</span>
+                </button>
+
+                <button onclick="toggleAdmin()" class="px-5 py-2.5 bg-white border border-orange-500 text-orange-600 rounded-2xl hover:bg-orange-50 transition flex items-center gap-2 font-medium">
+                    <i class="fas fa-cog"></i>
+                    <span data-translate="admin">Admin</span>
+                </button>
+                
+                <button onclick="window.location.href='#donasi'" class="px-8 py-3 bg-orange-500 hover:bg-orange-600 text-white rounded-3xl font-semibold flex items-center gap-2 transition" data-translate="donate-btn">
+                    <i class="fas fa-heart"></i> DONASI
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section id="beranda" class="hero-bg h-screen flex items-center text-white">
+        <div class="max-w-7xl mx-auto px-6 pt-20">
+            <div class="max-w-2xl">
+                <h1 id="hero-title" class="text-6xl md:text-7xl font-bold leading-tight mb-6 text-balance" data-translate="hero-title">
+                    Setiap Hewan<br>Berhak Bahagia
+                </h1>
+                <p id="hero-desc" class="text-xl mb-10 text-orange-100" data-translate="hero-desc">
+                    PawLove Shelter — memberikan rumah aman dan kasih sayang bagi anjing dan kucing yang membutuhkan.
+                </p>
+                <div class="flex flex-wrap gap-5">
+                    <a href="#adopsi" class="px-10 py-5 bg-white text-orange-600 rounded-3xl font-bold text-lg hover:bg-orange-50 transition flex items-center gap-3" data-translate="adopt-button">
+                        Lihat Hewan Siap Adopsi <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="#donasi" class="px-10 py-5 border-2 border-white rounded-3xl font-bold text-lg hover:bg-white/10 transition" data-translate="help-button">
+                        Bantu Kami
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Adopsi -->
+    <section id="adopsi" class="py-20 bg-zinc-100">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex justify-between items-end mb-12">
+                <div>
+                    <span class="text-orange-500 font-medium tracking-widest">TEMUKAN TEMAN BARU</span>
+                    <h2 id="adopt-section" class="text-5xl font-bold mt-2" data-translate="adopt-section">Hewan Siap Adopsi</h2>
+                </div>
+                <div class="flex gap-3">
+                    <button onclick="filterPets('all')" class="px-6 py-3 rounded-3xl border font-medium border-orange-500 bg-orange-50" id="filter-all" data-translate="all">Semua</button>
+                    <button onclick="filterPets('dog')" class="px-6 py-3 rounded-3xl border font-medium" id="filter-dog" data-translate="dogs">🐶 Anjing</button>
+                    <button onclick="filterPets('cat')" class="px-6 py-3 rounded-3xl border font-medium" id="filter-cat" data-translate="cats">🐱 Kucing</button>
+                </div>
+            </div>
+
+            <div id="pet-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"></div>
+        </div>
+    </section>
+
+    <!-- Donasi -->
+    <section id="donasi" class="py-20 bg-gradient-to-br from-orange-50 to-amber-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h2 id="donate-title" class="text-5xl font-bold leading-tight" data-translate="donate-title">
+                        Bantu Kami Memberi Mereka Kehidupan yang Lebih Baik
+                    </h2>
+                    <p id="donate-desc" class="mt-6 text-lg text-zinc-600" data-translate="donate-desc">
+                        Setiap donasi Anda sangat berarti untuk makanan, pengobatan, dan perawatan hewan-hewan kami.
+                    </p>
+                </div>
+                
+                <div class="bg-white rounded-3xl p-8 shadow-xl">
+                    <h3 class="font-semibold text-xl mb-6">Pilih Nominal Donasi</h3>
+                    <div class="grid grid-cols-3 gap-4 mb-8">
+                        <button onclick="selectAmount(100000)" class="amount-btn py-6 border-2 rounded-2xl text-center">Rp100rb</button>
+                        <button onclick="selectAmount(250000)" class="amount-btn py-6 border-2 border-orange-500 rounded-2xl text-center bg-orange-50">Rp250rb</button>
+                        <button onclick="selectAmount(500000)" class="amount-btn py-6 border-2 rounded-2xl text-center">Rp500rb</button>
+                    </div>
+                    
+                    <input id="custom-amount" type="number" placeholder="Nominal lain" class="w-full border rounded-2xl px-6 py-5 text-2xl focus:outline-none focus:border-orange-500">
+                    
+                    <button onclick="donateNow()" class="mt-8 w-full py-6 bg-gradient-to-r from-orange-500 to-amber-500 text-white text-xl font-bold rounded-3xl hover:brightness-110 transition" data-translate="donate-now">
+                        DONASI SEKARANG
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tentang -->
+    <section id="tentang" class="py-20">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-12 gap-12 items-center">
+                <div class="md:col-span-5">
+                    <img src="save.jpg" alt="Shelter" class="rounded-3xl shadow-2xl w-full">
+                </div>
+                <div class="md:col-span-7">
+                    <span class="uppercase tracking-widest text-orange-500">Sejak 2021</span>
+                    <h2 id="about-title" class="text-5xl font-bold mt-3 leading-tight" data-translate="about-title">
+                        Kami Menyelamatkan dan Memberi Harapan Baru
+                    </h2>
+                    <p id="about-desc" class="mt-8 text-lg leading-relaxed text-zinc-600" data-translate="about-desc">
+                        PawLove Shelter didirikan untuk melindungi anjing dan kucing jalanan yang terlantar, terluka, atau membutuhkan rumah baru yang penuh kasih sayang.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-zinc-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <p>© 2026 PawLove Shelter • Dibuat dengan ❤️ untuk hewan</p>
+        </div>
+    </footer>
+
+    <!-- Admin Modal -->
+    <div id="admin-modal" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-[100]">
+        <div class="bg-white rounded-3xl max-w-lg w-full mx-4 p-8">
+            <h3 class="text-2xl font-bold mb-6" data-translate="add-pet">Tambah Hewan Baru</h3>
+            <div class="space-y-6">
+                <input id="new-pet-name" placeholder="Nama Hewan" class="w-full border rounded-2xl px-5 py-4">
+                <div class="grid grid-cols-2 gap-4">
+                    <select id="new-pet-type" class="border rounded-2xl px-5 py-4">
+                        <option value="dog">Anjing</option>
+                        <option value="cat">Kucing</option>
+                    </select>
+                    <input id="new-pet-age" placeholder="Umur" class="border rounded-2xl px-5 py-4">
+                </div>
+                <button onclick="addNewPet()" class="w-full py-5 bg-orange-500 text-white rounded-3xl font-bold">Tambahkan Hewan</button>
+            </div>
+            <button onclick="toggleAdmin()" class="mt-6 w-full py-4 text-zinc-500 hover:text-black" data-translate="close">Tutup</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
